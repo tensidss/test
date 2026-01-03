@@ -1,13 +1,508 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Downstars Café</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #0f0f0f;
+  color: #fff;
+}
+
+/* HEADER */
+header {
+  background: #1c1c1c;
+  padding: 25px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 0 20px rgba(255,210,127,0.4);
+}
+nav a {
+  color: #ffd27f;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: 600;
+}
+nav a:hover {
+  text-shadow: 0 0 10px #ffd27f;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+}
+.hero h2 {
+  color: #ffd27f;
+  font-size: 40px;
+}
+
+/* MENU */
+.menu {
+  max-width: 1000px;
+  margin: auto;
+  padding: 40px 20px;
+}
+.menu-title {
+  text-align: center;
+  color: #ffd27f;
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 25px;
+}
+.menu-card {
+  background: #1b1b1b;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+.menu-card:hover {
+  transform: scale(1.03);
+}
+.menu-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+.info {
+  padding: 15px;
+}
+.info strong {
+  color: #ffd27f;
+}
+.add-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  background: linear-gradient(45deg,#ffd27f,#ffae42);
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* CART BUTTON */
+.cart-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #ffd27f;
+  color: #000;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.cart-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: red;
+  color: #fff;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CART PANEL */
+.cart-panel {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  height: 100%;
+  background: #1c1c1c;
+  padding: 20px;
+  transition: 0.4s;
+}
+.cart-panel.active {
+  right: 0;
+}
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+.cart-controls button {
+  background: none;
+  border: none;
+  color: #ffd27f;
+  font-size: 18px;
+  cursor: pointer;
+}
+.cart-total {
+  text-align: center;
+  margin-top: 15px;
+}
+.checkout-btn {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+  background: #ffd27f;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+}
+.close-cart {
+  text-align: center;
+  margin-top: 10px;
+  color: #aaa;
+  cursor: pointer;
+}
+
+/* FOOTER */
+footer {
+  background: #1c1c1c;
+  padding: 25px;
+  text-align: center;
+  margin-top: 50px;
+}
+</style>
 </head>
+
 <body>
-    <h1>
-        Привіт світ!
-    </h1>
+
+<header>
+  <h1>DOWNSTARS CAFÉ☕</h1>
+  <nav>
+    <a href="#about">Про нас ⭣</a>
+    <a href="#menu">Меню ⭣</a>
+    <a href="#contact">Контакти ⭣</a>
+  </nav>
+</header>
+
+<section class="hero" id="about">
+  <h2>Ласкаво просимо ✨</h2>
+  <p>•Працюємо 24/7🌉 </p> 
+  <p>працюємо без вихідних!😮</p>
+  <p>нові комбо кожен місяць☕</p>
+   <p>привітливий персонал та дуже смачна їжа😋</p>
+</section>
+
+<section class="menu" id="menu">
+<h2 class="menu-title">Наше меню</h2>
+<div class="menu-grid">
+
+<div class="menu-card">
+<img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93">
+<div class="info">
+<strong>☕ Капучино — 33 грн</strong>
+<button class="add-btn" onclick="addToCart('Капучино',33)">Добавити в корзину</button>
+</div>
+</div>
+
+<div class="menu-card">
+<img src="https://cdn.pixabay.com/photo/2017/08/07/22/57/coffee-2608864_640.jpg">
+<div class="info">
+<strong>☕ Латте — 29 грн</strong>
+<button class="add-btn" onclick="addToCart('Латте',29)">Добавити в корзину</button>
+</div>
+</div>
+
+<div class="menu-card">
+<img src="https://cdn.pixabay.com/photo/2020/04/07/15/39/yuzu-cheesecake-5013879_640.jpg">
+<div class="info">
+<strong>🍰 Чізкейк — 39 грн</strong>
+<button class="add-btn" onclick="addToCart('Чізкейк',39)">Добавити в корзину</button>
+</div>
+</div>
+
+<div class="menu-card">
+<img src="https://media.istockphoto.com/id/914523520/ru/%D1%84%D0%BE%D1%82%D0%BE/%D0%BC%D0%B5%D0%B4%D0%BE%D0%B2%D1%8B%D0%B9-%D1%82%D0%BE%D1%80%D1%82-%D0%BC%D0%B5%D0%B4%D0%BE%D0%B2%D0%B8%D0%BA-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9-%D1%82%D0%BE%D1%80%D1%82.jpg?s=612x612&w=0&k=20&c=SG4w2-FEMJPXXNCaFDitNBE87Sc6MetMRPEbl7C306A=">
+<div class="info">
+<strong>🎂медовик - 49 грн</strong>
+<button class="add-btn" onclick="addToCart('медовик',49)">Добавити в корзину</button>
+</div>
+</div>
+
+<div class="menu-card">
+<img src="https://media.istockphoto.com/id/689878528/ru/%D1%84%D0%BE%D1%82%D0%BE/%D1%81%D1%82%D0%B0%D0%BA%D0%B0%D0%BD%D1%8B-%D0%BB%D0%B8%D0%BC%D0%BE%D0%BD%D0%B0%D0%B4%D0%B0.jpg?s=612x612&w=0&k=20&c=zTBxvKkEd0HeIRTLb6zpG5IqH7exXXcKPzTzB1e8YqQ=">
+<div class="info">
+<strong>Лимонади (класичний, ягідний, цитрусовий) - усе по 24 грн</strong>
+<button class="add-btn" onclick="addToCart('Лимонади',24)">Добавити в корзину</button>
+</div>
+</div>
+
+<div class="menu-card">
+<img src="https://media.istockphoto.com/id/525650717/ru/%D1%84%D0%BE%D1%82%D0%BE/%D0%BA%D0%B0%D0%BA%D0%B0%D0%BE-%D0%BD%D0%B0%D0%BF%D0%B8%D1%82%D0%BE%D0%BA.jpg?s=612x612&w=0&k=20&c=I-IS78GBrqxKEK6R8t_QcyXpCR0GLFTcbGZuNVG0ueU=">
+<div class="info">
+<strong>гарячий шоколад - 27 грн</strong>
+<button class="add-btn" onclick="addToCart('гарячий шоколад',27)">Добавити в корзину</button>
+</div>
+</div>
+
+<div class="menu-card">
+<img src="https://media.istockphoto.com/id/508297600/ru/%D1%84%D0%BE%D1%82%D0%BE/%D1%82%D1%83%D1%80%D0%B5%D1%86%D0%BA%D0%B8%D0%B9-%D1%87%D0%B0%D0%B9.jpg?s=612x612&w=0&k=20&c=-rDD98E7w4Bakz-oubWbaJhLgTB89MzcDchUTI_ggKI=">
+<div class="info">
+<strong>Чай (чорний, зелений, трав’яний) - усе по 24 грн</strong>
+<button class="add-btn" onclick="addToCart('чай',24)">Добавити в корзину</button>
+</div>
+</div>
+
+<div class="menu-card">
+<img src="https://media.istockphoto.com/id/2162027596/ru/%D1%84%D0%BE%D1%82%D0%BE/%D0%BF%D0%B8%D1%86%D1%86%D0%B5%D1%80%D0%B8%D1%8F-%D0%B5%D0%B4%D0%B0.jpg?s=612x612&w=0&k=20&c=6JI05x2RS0wrm1Eg4S20Ke2QSg4_ykxuteBCJH0HMMs=">
+<div class="info">
+<strong>тірамісу - 37 грн</strong>
+<button class="add-btn" onclick="addToCart('тірамісу',37)">Добавити в корзину</button>
+</div>
+</div>
+
+<div class="menu-card">
+<img src="https://media.istockphoto.com/id/1219060216/ru/%D1%84%D0%BE%D1%82%D0%BE/%D0%B2-%D1%8D%D1%82%D1%83-%D0%B6%D0%B0%D1%80%D1%83-%D1%8F-%D0%BC%D0%BE%D0%B3%D1%83-%D1%87%D1%83%D0%B2%D1%81%D1%82%D0%B2%D0%BE%D0%B2%D0%B0%D1%82%D1%8C-%D1%81%D0%B5%D0%B1%D1%8F-%D0%BA%D0%B0%D0%BA-%D1%81%D0%BE%D1%81%D0%BA%D0%BE%D0%B1.jpg?s=612x612&w=0&k=20&c=tmDcuUSfWp2ogP4kyvWmPXn_rGnNOoYS9cuEgIrj9iA=">
+<div class="info">
+<strong>прохолодне смузі - 29 грн</strong>
+<button class="add-btn" onclick="addToCart('смузі',29)">Добавити в корзину</button>
+</div>
+</div>
+
+
+</div>
+</section>
+
+<!-- КНОПКА КОРЗИНЫ -->
+<div class="cart-btn" onclick="toggleCart()">
+  🛒
+  <div class="cart-count" id="cartCount">0</div>
+</div>
+
+<!-- КОРЗИНА -->
+<div class="cart-panel" id="cartPanel">
+  <h3>Корзина</h3>
+  <div id="cartItems"></div>
+  <div class="cart-total">Сума: <span id="total">0</span> грн</div>
+  <button class="checkout-btn" onclick="checkout()">Оформити замовлення</button>
+  <div class="close-cart" onclick="toggleCart()">✖ Закрити</div>
+</div>
+
+<style>
+/* ПАНЕЛЬ КОРЗИНЫ */
+.cart-panel {
+  position: fixed;
+  top: 0;
+  right: -350px;
+  width: 320px;
+  height: 100%;
+  background: #1c1c1c;
+  box-shadow: -5px 0 20px rgba(255,210,127,0.3);
+  padding: 20px;
+  transition: right 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  z-index: 200;
+}
+.cart-panel.active {
+  right: 0;
+}
+.cart-panel h3 {
+  text-align: center;
+  color: #ffd27f;
+  margin-bottom: 20px;
+  font-size: 22px;
+  letter-spacing: 1px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 0;
+  font-size: 14px;
+  padding: 5px 0;
+  border-bottom: 1px solid #333;
+}
+.cart-controls button {
+  background: #ffd27f;
+  border: none;
+  color: #1c1c1c;
+  font-size: 16px;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  margin: 0 2px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.cart-controls button:hover {
+  background: #ffae42;
+  transform: scale(1.1);
+}
+
+.cart-total {
+  margin-top: 20px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.checkout-btn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px;
+  background: linear-gradient(45deg, #ffd27f, #ffae42);
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #1c1c1c;
+  transition: 0.3s;
+  box-shadow: 0 0 10px rgba(255,210,127,0.6);
+}
+.checkout-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255,210,127,0.9);
+}
+
+.close-cart {
+  text-align: center;
+  margin-top: auto;
+  color: #aaa;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 8px;
+  border-top: 1px solid #333;
+  transition: 0.3s;
+}
+.close-cart:hover {
+  color: #ffd27f;
+  font-weight: 600;
+}
+</style>
+
+<script>
+let cart = {};
+
+function toggleCart() {
+  document.getElementById('cartPanel').classList.toggle('active');
+}
+
+function addToCart(name, price) {
+  if (!cart[name]) {
+    cart[name] = {price, qty: 1};
+  } else {
+    cart[name].qty++;
+  }
+  renderCart();
+}
+
+function changeQty(name, delta) {
+  cart[name].qty += delta;
+  if (cart[name].qty <= 0) delete cart[name];
+  renderCart();
+}
+
+function renderCart() {
+  const items = document.getElementById('cartItems');
+  const count = document.getElementById('cartCount');
+  let total = 0;
+  let qtyTotal = 0;
+  items.innerHTML = '';
+
+  for (let item in cart) {
+    total += cart[item].price * cart[item].qty;
+    qtyTotal += cart[item].qty;
+    items.innerHTML += `
+      <div class="cart-item">
+        <span>${item}</span>
+        <div class="cart-controls">
+          <button onclick="changeQty('${item}',-1)">➖</button>
+          ${cart[item].qty}
+          <button onclick="changeQty('${item}',1)">➕</button>
+        </div>
+      </div>
+    `;
+  }
+
+  document.getElementById('total').textContent = total;
+  count.textContent = qtyTotal;
+}
+
+function checkout() {
+  if(Object.keys(cart).length === 0){
+    alert('Корзина пуста!');
+  } else {
+    alert('Замовлення оформлено!☕смачного!🤗 ');
+    cart = {};
+    renderCart();
+    toggleCart();
+  }
+}
+</script>
+
+
+<footer id="contact">
+<p>📍 вул. Центральна, 93</p>
+<p>📞 +38 (093) 507 19 77</p>
+<p>📞 +38 (063) 507 19 77</p>
+<p>📞 +38 (063) 532 32 32</p>
+</footer>
+
+<script>
+let cart = {};
+
+function toggleCart() {
+  document.getElementById('cartPanel').classList.toggle('active');
+}
+
+function addToCart(name, price) {
+  if (!cart[name]) cart[name] = {price, qty: 1};
+  else cart[name].qty++;
+  renderCart();
+}
+
+function changeQty(name, d) {
+  cart[name].qty += d;
+  if (cart[name].qty <= 0) delete cart[name];
+  renderCart();
+}
+
+function renderCart() {
+  let items = document.getElementById('cartItems');
+  let count = document.getElementById('cartCount');
+  let total = 0, qty = 0;
+  items.innerHTML = '';
+  for (let i in cart) {
+    total += cart[i].price * cart[i].qty;
+    qty += cart[i].qty;
+    items.innerHTML += `
+      <div class="cart-item">
+        ${i}
+        <div class="cart-controls">
+          <button onclick="changeQty('${i}',-1)">➖</button>
+          ${cart[i].qty}
+          <button onclick="changeQty('${i}',1)">➕</button>
+        </div>
+      </div>`;
+  }
+  document.getElementById('total').textContent = total;
+  count.textContent = qty;
+}
+
+function checkout() {
+  alert('Замовлення оформлено 🖤');
+  cart = {};
+  renderCart();
+}
+</script>
+
 </body>
 </html>
